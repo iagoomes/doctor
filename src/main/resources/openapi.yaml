@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: "Doctor API"
+  description: "API for managing doctors"
+  version: "1.0.0"
+tags:
+  - name: "Doctor"
+    description: "Operations related to doctors"
+paths:
+  /doctors:
+    post:
+      summary: "Create a new doctor"
+      operationId: "createDoctor"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorRequestPost"
+      responses:
+        "200":
+          description: "Doctor created successfully"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DoctorDetailResponse"
+    get:
+      summary: "List all doctors"
+      operationId: "listDoctors"
+      responses:
+        "200":
+          description: "List of doctors"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DoctorResponse"
+  /doctors/{id}:
+    get:
+      summary: "Get doctor by ID"
+      operationId: "getDoctorById"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Doctor details"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DoctorDetailResponse"
+    put:
+      summary: "Update doctor by ID"
+      operationId: "updateDoctor"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DoctorRequestPut"
+      responses:
+        "200":
+          description: "Doctor updated successfully"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DoctorDetailResponse"
+    delete:
+      summary: "Delete doctor by ID"
+      operationId: "deleteDoctor"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        "200":
+          description: "Doctor deleted successfully"
+
+components:
+  schemas:
+    Address:
+      type: "object"
+      properties:
+        street:
+          type: "string"
+          description: "Street name and number"
+        city:
+          type: "string"
+          description: "City name"
+        state:
+          type: "string"
+          description: "State or province"
+        zipCode:
+          type: "string"
+          description: "Postal code"
+      required:
+        - street
+        - city
+        - state
+        - zipCode
+    AddressRequest:
+      allOf:
+        - $ref: "#/components/schemas/Address"
+
+    DoctorRequestPost:
+      type: "object"
+      properties:
+        specialty:
+          type: "string"
+          enum:
+            - "ORTHOPEDICS"
+            - "CARDIOLOGY"
+            - "GYNECOLOGY"
+            - "DERMATOLOGY"
+        address:
+          $ref: "#/components/schemas/AddressRequest"
+    DoctorDetailResponse:
+      type: "object"
+      properties:
+        specialty:
+          type: "string"
+          enum:
+            - "ORTHOPEDICS"
+            - "CARDIOLOGY"
+            - "GYNECOLOGY"
+            - "DERMATOLOGY"
+        address:
+          $ref: "#/components/schemas/Address"
+    DoctorResponse:
+      type: "object"
+      properties:
+        specialty:
+          type: "string"
+          enum:
+            - "ORTHOPEDICS"
+            - "CARDIOLOGY"
+            - "GYNECOLOGY"
+            - "DERMATOLOGY"
+    DoctorRequestPut:
+      type: "object"
+      properties:
+        address:
+          $ref: "#/components/schemas/AddressRequest"
