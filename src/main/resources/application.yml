@@ -1,1 +1,28 @@
-spring.application.name=doctor
+spring:
+  application:
+    name: doctor-api
+  datasource:
+    url: jdbc:h2:mem:doutordb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+#    show-sql: true
+
+server:
+  servlet:
+    context-path: /doctor-api
+
+logging:
+  level:
+    root: INFO
+    br.com.fiap.postech.doctor: info
+    br.com.fiap.postech.doctor.error: error
+
+secret:
+  key: ${SECRET_KEY:src/main/resources/secret/secret-key}
