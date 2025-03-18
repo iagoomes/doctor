@@ -36,6 +36,4 @@ public class DoctorData {
     private Specialty specialty;
     @Embedded
     private Address address;
-
-
 }

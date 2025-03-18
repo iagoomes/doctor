@@ -23,31 +23,30 @@ public class Address {
         return street;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
     public String getCity() {
         return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void updateInformation(Address address) {
+        if (!address.getStreet().isEmpty()) {
+            this.street = address.getStreet();
+        }
+        if (!address.getCity().isEmpty()) {
+            this.city = address.getCity();
+        }
+        if (!address.getState().isEmpty()) {
+            this.state = address.getState();
+        }
+        if (!address.getZipCode().isEmpty()) {
+            this.zipCode = address.getZipCode();
+        }
     }
 }

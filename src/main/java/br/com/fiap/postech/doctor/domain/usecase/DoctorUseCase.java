@@ -5,6 +5,8 @@ import br.com.fiap.postech.doctor.domain.entity.Doctor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class DoctorUseCase {
@@ -15,5 +17,19 @@ public class DoctorUseCase {
         return doctorProvider.createDoctor(doctor);
     }
 
+    public void deleteDoctor(Long id) {
+        doctorProvider.deleteDoctor(id);
+    }
 
+    public Doctor getDoctorById(Long id) {
+        return doctorProvider.getDoctorById(id);
+    }
+
+    public List<Doctor> listDoctors() {
+        return doctorProvider.listDoctors();
+    }
+
+    public Doctor updateDoctor(Long id, Doctor doctor) {
+        return doctorProvider.updateDoctor(id, doctor);
+    }
 }

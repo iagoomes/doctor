@@ -97,7 +97,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/DoctorRequestDTO"
+              $ref: "#/components/schemas/DoctorUpdateDTO"
       responses:
         "200":
           description: "Doctor updated successfully"
@@ -153,7 +153,8 @@ components:
       in: "path"
       required: true
       schema:
-        type: "string"
+        type: "integer"
+        format: "int64"
   schemas:
     AddressDTO:
       type: "object"
@@ -208,6 +209,23 @@ components:
         - email
         - phone
         - crm
+        - specialty
+        - address
+    DoctorUpdateDTO:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        phone:
+          type: "string"
+          pattern: "\\(\\d{2}\\) \\d{5}-\\d{4}"
+        specialty:
+          $ref: "#/components/schemas/SpecialtyDTO"
+        address:
+          $ref: "#/components/schemas/AddressRequestDTO"
+      required:
+        - name
+        - phone
         - specialty
         - address
     DoctorResponseDTO:
